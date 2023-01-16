@@ -5,17 +5,17 @@ export const getAll = async () => {
 }
 
 export const get = async (id) => {
-  return await Products.findOne(id);
+  return await Products.findOne({ '_id': id });
 }
 
 export const addPost = async (data) => {
-  return await new Products(data).save();
+  return new Products(data).save();
 }
 
-export const deletePost = async (id) => {
-  return await Products.findOneAndDelete(id)
+export const deleteProduct = async (id) => {
+  return await Products.findOneAndDelete({ '_id': id });
 }
 
 export const editPost = async (id, data) => {
-  return await Products.findOneAndUpdate(id, data)
+  return await Products.findOneAndUpdate({ '_id': id }, data);
 }

@@ -5,12 +5,14 @@ import mongoose from "mongoose";
 import routerAuth from "./routes/auth";
 import routerProducts from "./routes/products"
 import path from "path";
+import routerCategory from "./routes/category";
 const app = express();
 app.use(express.json());
 app.use(cors());
 const port = process.env.PORT;
 app.use("/api", routerAuth);
 app.use("/api", routerProducts);
+app.use("/api", routerCategory)
 app.use(express.static(path.resolve('./public')));
 try {
     mongoose.connect("mongodb://localhost:27017/React-toolkit-js");

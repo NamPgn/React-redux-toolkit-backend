@@ -30,7 +30,7 @@ export const deleteUser = async (_id) => {
 
 //edit
 export const editUser = async (id, data) => {
-    return await User.findOneAndUpdate(id, data)
+    return await User.findOneAndUpdate({ '_id': id }, data)
 }
 
 //edit image

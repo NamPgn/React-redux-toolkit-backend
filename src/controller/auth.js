@@ -104,10 +104,8 @@ export const getAlluser = async (req, res) => {
 
 export const edit = async (req, res) => {
     try {
-        const { username, email, password, role } = req.body;
+        const { username, email, password, role, _id } = req.body;
         const { filename } = req.file;
-        const id = req.params.id;
-        console.log(id)
         const payload = req.body;
         let datas = {
             username: username,
@@ -116,7 +114,7 @@ export const edit = async (req, res) => {
             password: password,
             role: role
         }
-        const data = await editUser(id, datas);
+        const data = await editUser(_id, datas);
         res.status(200).json({
             message: "Thành công", data
         })
@@ -134,9 +132,7 @@ export const editImage = async (req, res) => {
         }
         const data = await editImg(id, payload);
         console.log("data", data);
-        res.status(200).json({
-            message: "Thành công", data
-        })
+        res.json(data);
     } catch (error) {
         console.log(error);
     }
@@ -169,3 +165,42 @@ export const getAuth = async (req, res) => {
         console.log(error)
     }
 }
+
+// export const addUser = async (req, res) => {
+//     try {
+//         var { username, email, password, role } = req.body;
+//         const { filename } = req.file;
+//         filename ? filename : "https://taytou.com/wp-content/uploads/2022/08/Tai-anh-dai-dien-cute-de-thuong-hinh-meo-nen-xanh-la.png";
+
+//         // console.log("req.file", filename)
+
+//         const getuser = await getDataUser({ email: email }); //tìm lấy ra cái thằng email
+//         if (getuser) { //kiểm tra nếu mà nó email đã tồn tại thì trả về cái lỗi
+//             res.status(401).json({
+//                 success: false,
+//                 message: 'Tài khoản đã tồn tại'
+//             })
+//         }
+//         // mã hóa mật khẩu
+//         var hashPw = passwordHash(password);
+//         const newUser = {
+//             username: username,
+//             email: email,
+//             password: hashPw,
+//             image: `http://localhost:8000/images/` + filename,
+//             role: role
+//         }
+//         console.log("newUsser", newUser)
+//         await addUser(newUser)
+//         return res.status(200).json({
+//             success: true,
+//             message: "Thành công",
+//             newUser: [newUser]
+//         })
+//     } catch (error) {
+//         console.log(error);
+//         res.json({
+//             message: "Không đăg kí dđược "
+//         })
+//     }
+// }

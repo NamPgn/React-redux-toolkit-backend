@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-
+const { ObjectId } = mongoose.Types;
 const productSchema = new Schema({
   name: {
     type: String
@@ -11,10 +11,14 @@ const productSchema = new Schema({
     type: String
   },
   category: {
-    type: String
+    type: ObjectId,
+    ref: "Category"
   },
   price: {
     type: Number
+  },
+  select: {
+    type: false
   }
 }, { collection: "products" }, { timestamps: true });
 
